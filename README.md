@@ -29,10 +29,15 @@ It periodically records your internet speed (download, upload, ping) and visuali
 ```
 Network-speed-monitor/
 │── docker-compose.yml
-│── speedtest.sh
+│── .env
+│── node-app/
+│   ├── Dockerfile
+│   ├── package.json
+│   └── index.js
 │── grafana/
-│   └── dashboard.json
+│   └── network_speed_dashboard.json
 │── README.md
+│── .gitignore
 ```
 
 ---
@@ -77,13 +82,13 @@ This will start:
 3. Import the dashboard:
 
    * Go to **Dashboards → Import**
-   * Upload `grafana/dashboard.json`
+   * Upload `grafana/network_speed_dashboard.json`
 
 ---
 
 ## 🔄 How it Works
 
-The `speedtest.sh` script runs periodically inside the container, performs a speed test, and sends results to InfluxDB. Grafana reads the data and displays it on the dashboard.
+The `speedtest.sh` script runs periodically inside the container, performs a speed test, and sends results to InfluxDB. Grafana reads the data and displays it on the dashboard.(This is yet to be implemented)
 
 ---
 
