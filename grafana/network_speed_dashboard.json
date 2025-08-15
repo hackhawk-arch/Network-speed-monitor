@@ -1,0 +1,72 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Network Speed Monitor",
+    "timezone": "browser",
+    "schemaVersion": 36,
+    "version": 1,
+    "panels": [
+      {
+        "type": "timeseries",
+        "title": "Download Speed (Mbps)",
+        "datasource": {
+          "type": "influxdb",
+          "uid": "influxdb"
+        },
+        "targets": [
+          {
+            "query": "from(bucket: \"network_data\") |> range(start: -24h) |> filter(fn: (r) => r._measurement == \"network_speed\" and r._field == \"download\")",
+            "refId": "A"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 }
+      },
+      {
+        "type": "timeseries",
+        "title": "Upload Speed (Mbps)",
+        "datasource": {
+          "type": "influxdb",
+          "uid": "influxdb"
+        },
+        "targets": [
+          {
+            "query": "from(bucket: \"network_data\") |> range(start: -24h) |> filter(fn: (r) => r._measurement == \"network_speed\" and r._field == \"upload\")",
+            "refId": "B"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 8, "w": 12, "h": 8 }
+      },
+      {
+        "type": "timeseries",
+        "title": "Ping Latency (ms)",
+        "datasource": {
+          "type": "influxdb",
+          "uid": "influxdb"
+        },
+        "targets": [
+          {
+            "query": "from(bucket: \"network_data\") |> range(start: -24h) |> filter(fn: (r) => r._measurement == \"network_speed\" and r._field == \"ping\")",
+            "refId": "C"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 16, "w": 12, "h": 8 }
+      },
+      {
+        "type": "timeseries",
+        "title": "Overview: Download, Upload, Ping",
+        "datasource": {
+          "type": "influxdb",
+          "uid": "influxdb"
+        },
+        "targets": [
+          {
+            "query": "from(bucket: \"network_data\") |> range(start: -24h) |> filter(fn: (r) => r._measurement == \"network_speed\")",
+            "refId": "D"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 24, "w": 24, "h": 10 }
+      }
+    ]
+  },
+  "overwrite": false
+}
